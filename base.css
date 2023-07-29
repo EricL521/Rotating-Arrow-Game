@@ -1,0 +1,57 @@
+@font-face {
+	font-family: Comfortaa;
+	src: url(Resources/Comfortaa/static/Comfortaa-Light.ttf);
+	font-weight: 300;
+}
+@font-face {
+	font-family: Comfortaa;
+	src: url(Resources/Comfortaa/static/Comfortaa-Regular.ttf);
+	font-weight: 400;
+}
+@font-face {
+	font-family: Comfortaa;
+	src: url(Resources/Comfortaa/static/Comfortaa-Medium.ttf);
+	font-weight: 500;
+}
+@font-face {
+	font-family: Comfortaa;
+	src: url(Resources/Comfortaa/static/Comfortaa-SemiBold.ttf);
+	font-weight: 600;
+}
+@font-face {
+	font-family: Comfortaa;
+	src: url(Resources/Comfortaa/static/Comfortaa-Bold.ttf);
+	font-weight: 700;
+}
+
+.no-transition {
+	transition: none !important;
+}
+
+:root {
+	--color-dark: #25171A;
+	--color-light: #F1E4ED;
+	--color-red: #CE6964;
+	--color-green: #AFDDA6;
+	--color-blue: #727DAC;
+}
+* {
+	font-family: inherit;
+}
+body {
+	font-family: Comfortaa, sans-serif, Arial;
+	color: var(--color-dark);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+	font-weight: 600;
+}
+h2 {
+	font-weight: 500;
+}
+sub {
+	font-weight: 300;
+}

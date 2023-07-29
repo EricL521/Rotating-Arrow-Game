@@ -1,0 +1,30 @@
+body {
+	width: min-content;
+}
+h1, sub {
+	display: block;
+	width: 100%;
+	color: var(--color-light);
+	text-align: center;
+}
+h1 {
+	margin-bottom: 5px;
+}
+
+#scramble-button {
+	width: 100%;
+	margin-top: 10px;
+}
+
+#table {
+	width: 500px;
+	height: 500px;
+	margin: 10px;
+}
+
+.arrow {
+	width: 100%;
+	height: auto;
+	filter: brightness(0.95);
+	transition: transform 0.25s ease-in-out;
+}
