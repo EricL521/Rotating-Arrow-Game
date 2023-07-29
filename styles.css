@@ -1,7 +1,8 @@
 body {
 	width: min-content;
+	background-color: var(--color-dark);
 }
-h1, sub {
+h1, h2, sub {
 	display: block;
 	width: 100%;
 	color: var(--color-light);
@@ -10,10 +11,24 @@ h1, sub {
 h1 {
 	margin-bottom: 5px;
 }
+a {
+	color: var(--color-blue);
+}
 
 #scramble-button {
 	width: 100%;
 	margin-top: 10px;
+	cursor: pointer;
+	transition: filter 0.1s;
+	background-color: var(--color-neutral);
+	border: 0;
+	border-radius: 10px;
+}
+#scramble-button:hover {
+	filter: brightness(1.1);
+}
+#scramble-button:active {
+	filter:brightness(1.2);
 }
 
 #table {
@@ -26,5 +41,5 @@ h1 {
 	width: 100%;
 	height: auto;
 	filter: brightness(0.95);
-	transition: transform 0.25s ease-in-out;
+	transition: transform 0.2s ease-in-out;
 }

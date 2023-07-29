@@ -29,18 +29,18 @@
 }
 
 :root {
-	--color-dark: #25171A;
+	--color-dark: #131516;
+	--color-neutral: #55505C;
 	--color-light: #F1E4ED;
 	--color-red: #CE6964;
 	--color-green: #AFDDA6;
-	--color-blue: #727DAC;
+	--color-blue: #7c94ff;
 }
 * {
 	font-family: inherit;
 }
 body {
 	font-family: Comfortaa, sans-serif, Arial;
-	color: var(--color-dark);
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

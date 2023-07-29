@@ -1,7 +1,7 @@
 
 // rows, columns
 const dimensions = [4, 4];
-const transitionDuration = 0.25; // seconds
+const transitionDuration = 0.2; // seconds
 const tableId = 'table';
 const scrambleButtonId = 'scramble-button';
 const winStateId = 'win-state';
