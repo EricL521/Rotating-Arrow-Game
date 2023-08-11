@@ -11,10 +11,21 @@
 	<title>Rotating Arrow Game</title>
 </head>
 <body>
-	<h1>Rotating Arrow Game</h1>
-	<sub>Originally a minigame from <a href="https://play.google.com/store/apps/details?id=com.conicgames.exponentialidle" target="_blank">Exponential Idle</a></sub>
-	<button id="scramble-button"><h2>Scramble</h2></button>
-	<table id = "table"></table>
-	<h1 id="win-state">Solved</h1>
+	<div id="game">
+		<h1 id="title">Rotating Arrow Game</h1>
+		<sub>Originally a minigame from <a href="https://play.google.com/store/apps/details?id=com.conicgames.exponentialidle" target="_blank">Exponential Idle</a></sub>
+		<hr>
+
+		<h2 id="size-label">Current size (click to change) </h2>
+		<div id="size-inputs">
+			<input id="width" type="number">
+			<h2>x</h2>
+			<input id="height" type="number">
+		</div>
+
+		<button id="scramble-button"><h2>Scramble</h2></button>
+		<table id = "table"></table>
+		<h1 id="win-state"></h1>
+	</div>
 </body>
 </html>

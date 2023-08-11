@@ -31,7 +31,7 @@
 :root {
 	--color-dark: #131516;
 	--color-neutral: #55505C;
-	--color-light: #F1E4ED;
+	--color-light: #F3F7F7;
 	--color-red: #CE6964;
 	--color-green: #AFDDA6;
 	--color-blue: #7c94ff;
@@ -54,4 +54,17 @@ h2 {
 }
 sub {
 	font-weight: 300;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+	appearance: textfield;
 }

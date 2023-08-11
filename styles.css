@@ -1,45 +1,91 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
 body {
-	width: min-content;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
 	background-color: var(--color-dark);
+}
+
+h1, h2, sub, p {
+	color: var(--color-light);
 }
 h1, h2, sub {
 	display: block;
 	width: 100%;
-	color: var(--color-light);
 	text-align: center;
-}
-h1 {
-	margin-bottom: 5px;
 }
 a {
 	color: var(--color-blue);
+}
+
+#game {
+	width: min-content;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 1em;
+}
+
+#title {
+	margin: 0 0 0.25em 0;
+}
+
+#size-label {
+	margin-bottom: 0;
+}
+#size-inputs {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+#size-inputs h2 {
+	width: auto;
+	margin: 0;
+}
+#size-inputs input {
+	width: 100%;
+	background-color: var(--color-dark);
+	color: var(--color-light);
+	border: none;
+
+	font-size: 1.5em;
+	font-weight: 500;
+}
+#size-inputs input:focus {
+	outline: 0 !important;
+}
+#size-inputs #width {
+	text-align: right;
 }
 
 #scramble-button {
 	width: 100%;
 	margin-top: 10px;
 	cursor: pointer;
-	transition: filter 0.1s;
+	transition: filter 0.2s;
 	background-color: var(--color-neutral);
 	border: 0;
 	border-radius: 10px;
 }
 #scramble-button:hover {
-	filter: brightness(1.1);
+	filter: brightness(1.2);
 }
 #scramble-button:active {
-	filter:brightness(1.05);
+	filter:brightness(1.1);
 }
 
 #table {
-	width: 500px;
-	height: 500px;
 	margin: 10px;
 }
 
 .arrow {
 	width: 100%;
 	height: auto;
+	user-select: none;
 	filter: brightness(0.95);
 	transition: transform 0.2s ease-in-out;
 }

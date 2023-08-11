@@ -1,14 +1,41 @@
 
 // rows, columns
-const dimensions = [4, 4];
-const transitionDuration = 0.2; // seconds
+let dimensions = [4, 4];
+const tableWidth = 400; // in px
+// height will be calculated based on width
+// define all the ids
 const tableId = 'table';
+const widthInputId = 'width';
+const heightInputId = 'height';
 const scrambleButtonId = 'scramble-button';
 const winStateId = 'win-state';
 const arrowImage = "Resources/Arrow.svg";
 
+// gets the dimensions from the width and height inputs, and updates the table if they are valid
+// returns cells if valid, null if not
+const updateDimensions = (widthInput, heightInput) => {
+	const newDimensions = getDimensions(widthInput, heightInput);
+	if (newDimensions[0] > 0 && newDimensions[1] > 0) {
+		dimensions = newDimensions;
+		return generateTable(document.getElementById(tableId), dimensions);
+	}
+	return null;
+};
+// returns [rows, columns] from width and height inputs
+const getDimensions = (widthInput, heightInput) => {
+	return [parseInt(heightInput.value), parseInt(widthInput.value)];
+};
+
 // returns the 2d array of cells
+// also clears adds the cells to the html table
 const generateTable = (tableElement, dimensions) => {
+	// clear table
+	tableElement.innerHTML = '';
+	// set table size
+	tableElement.style.width = `${tableWidth}px`;
+	tableElement.style.height = `${tableWidth * (dimensions[0] / dimensions[1])}px`;
+
+	// create cells array to store cells
 	const cells = [];
 	for (let i = 0; i < dimensions[0]; i ++) {
 		const row = document.createElement('tr');
@@ -16,6 +43,7 @@ const generateTable = (tableElement, dimensions) => {
 		for (let j = 0; j < dimensions[1]; j ++) {
 			const cell = document.createElement('td');
 			cell.classList.add('cell');
+			cell.onclick = () => onCellClick(cells, i, j); // add onclick
 			// add to table and js array
 			row.appendChild(cell);
 			// create arrow in cell
@@ -24,13 +52,18 @@ const generateTable = (tableElement, dimensions) => {
 			arrow.classList.add('arrow');
 			arrow.classList.add('up');
 			arrow.style.transform = 'rotate(0deg)';
+			arrow.draggable = false;
 			cell.appendChild(arrow);
 			
+			// add cerll to row array
 			rowCells.push(cell);
 		}
+		// add row to cells array
 		cells.push(rowCells);
 		tableElement.appendChild(row);
 	}
+	// update win state
+	updateWinState();
 	return cells;
 };
 
@@ -84,14 +117,29 @@ const onCellClick = (cells, row, column) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+	const widthInput = document.getElementById(widthInputId);
+	const heightInput = document.getElementById(heightInputId);
+	// check width and height inputs
+	const inputDimensions = getDimensions(widthInput, heightInput);
+	if (inputDimensions[0] > 0 && inputDimensions[1] > 0)
+		dimensions = inputDimensions;
+	else // if not, set them to the default
+		[widthInput.value, heightInput.value] = dimensions;
+
 	// generate table
-	const cells = generateTable(document.getElementById(tableId), dimensions);
-	// add onclicks to cells
-	for (let i = 0; i < cells.length; i ++)
-		for (let j = 0; j < cells[0].length; j ++)
-			cells[i][j].onclick = () => onCellClick(cells, i, j);
-	updateWinState();
+	let cells = generateTable(document.getElementById(tableId), dimensions);
 	
 	// add onclick to scramble button
 	document.getElementById(scrambleButtonId).onclick = () => scramble(cells);
+	// add oninput to width and height inputs
+	widthInput.oninput = () => {
+		const newCells = updateDimensions(widthInput, heightInput);
+		if (newCells)
+			cells = newCells;
+	};
+	heightInput.oninput = () => {
+		const newCells = updateDimensions(widthInput, heightInput);
+		if (newCells)
+			cells = newCells;
+	}
 });
