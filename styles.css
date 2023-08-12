@@ -86,10 +86,10 @@ a {
 }
 
 .arrow {
+	display: block;
 	width: 100%;
 	height: auto;
 	user-select: none;
 	filter: brightness(0.95);
 	transition: transform 0.2s ease-in-out;
-	transform-origin: 50% 60%;
 }
