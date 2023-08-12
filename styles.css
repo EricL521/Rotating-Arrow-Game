@@ -20,6 +20,7 @@ h1, h2, sub {
 }
 a {
 	color: var(--color-blue);
+	text-decoration: none;
 }
 
 #game {
@@ -80,6 +81,10 @@ a {
 
 #table {
 	margin: 10px;
+	border-collapse: collapse
+}
+.cell {
+	padding: 0;
 }
 .green-cell {
 	background-color: var(--color-green);
@@ -87,7 +92,8 @@ a {
 
 .arrow {
 	display: block;
-	width: 100%;
+    margin: 0 auto 0 auto; /* Used for centering arrow */
+	width: 90%;
 	height: auto;
 	user-select: none;
 	filter: brightness(0.95);
