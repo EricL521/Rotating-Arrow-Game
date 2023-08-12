@@ -81,6 +81,9 @@ a {
 #table {
 	margin: 10px;
 }
+.green-cell {
+	background-color: var(--color-green);
+}
 
 .arrow {
 	width: 100%;
@@ -88,4 +91,5 @@ a {
 	user-select: none;
 	filter: brightness(0.95);
 	transition: transform 0.2s ease-in-out;
+	transform-origin: 50% 60%;
 }

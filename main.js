@@ -44,6 +44,7 @@ const generateTable = (tableElement, dimensions) => {
 			const cell = document.createElement('td');
 			cell.classList.add('cell');
 			cell.onclick = () => onCellClick(cells, i, j); // add onclick
+			cell.oncontextmenu = () => {onCellRightClick(cell); return false;}; // add right click detection
 			// add to table and js array
 			row.appendChild(cell);
 			// create arrow in cell
@@ -68,6 +69,7 @@ const generateTable = (tableElement, dimensions) => {
 };
 
 // scrambles cells for a 2d array of cells
+// also resets table cell colosr
 const scramble = (cells) => {
 	// set each cell to random state
 	for (let i = 0; i < cells.length; i ++)
@@ -78,6 +80,9 @@ const scramble = (cells) => {
 			cells[i][j].children[0].classList.add(newState);
 			// set transform
 			cells[i][j].children[0].style.transform = `rotate(${90 * statesMap[newState]}deg)`;
+
+			// remove green color
+			cells[i][j].classList.remove('green-cell');
 		}
 	updateWinState();
 };
@@ -115,6 +120,13 @@ const onCellClick = (cells, row, column) => {
 				rotateCell(cells[row + i][column + j]);
 	updateWinState();
 };
+// toggles the cell green
+const onCellRightClick = (cell) => {
+	if (cell.classList.contains('green-cell'))
+		cell.classList.remove('green-cell');
+	else
+		cell.classList.add('green-cell');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	const widthInput = document.getElementById(widthInputId);
