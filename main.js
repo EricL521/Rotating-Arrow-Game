@@ -1,6 +1,10 @@
 
-// rows, columns
-let dimensions = [4, 4];
+// parse URL, if it has rows and columns, set them to the url values
+const url = new URL(window.location.href);
+const urlParams = url.searchParams;
+const rows = parseInt(urlParams.get('rows'));
+const columns = parseInt(urlParams.get('columns'));
+
 const tableWidth = 400; // in px
 // height will be calculated based on width
 // define all the ids
@@ -13,22 +17,29 @@ const arrowImage = "Resources/Arrow.svg";
 
 // gets the dimensions from the width and height inputs, and updates the table if they are valid
 // returns cells if valid, null if not
-const updateDimensions = (widthInput, heightInput) => {
+const updateDimensions = (dimensions, widthInput, heightInput) => {
 	const newDimensions = getDimensions(widthInput, heightInput);
 	if (newDimensions[0] > 0 && newDimensions[1] > 0) {
-		dimensions = newDimensions;
-		return generateTable(document.getElementById(tableId), dimensions);
+		[dimensions[0], dimensions[1]] = newDimensions;
+		// update url
+		urlParams.set('rows', dimensions[0]);
+		urlParams.set('columns', dimensions[1]);
+		// set url to new url
+		history.pushState(null, null, url);
+		// if it is valid, generate new table
+		return generateTable(dimensions, document.getElementById(tableId));
 	}
 	return null;
 };
 // returns [rows, columns] from width and height inputs
 const getDimensions = (widthInput, heightInput) => {
+	console.log([parseInt(heightInput.value), parseInt(widthInput.value)]	);
 	return [parseInt(heightInput.value), parseInt(widthInput.value)];
 };
 
 // returns the 2d array of cells
 // also clears adds the cells to the html table
-const generateTable = (tableElement, dimensions) => {
+const generateTable = (dimensions, tableElement) => {
 	// clear table
 	tableElement.innerHTML = '';
 	// set table size
@@ -89,7 +100,7 @@ const scramble = (cells) => {
 
 // updates the text of the win state
 const updateWinState = () => {
-	if (document.getElementsByClassName('up').length == dimensions[0] * dimensions[1])
+	if (document.getElementsByClassName('up').length == document.getElementsByClassName('cell').length)
 		document.getElementById(winStateId).innerHTML = 'Solved!';
 	else
 		document.getElementById(winStateId).innerHTML = 'Unsolved...';
@@ -128,29 +139,33 @@ const onCellRightClick = (cell) => {
 		cell.classList.add('green-cell');
 }
 
+// initialize everything
 document.addEventListener('DOMContentLoaded', () => {
+	// rows, columns
+	let dimensions = [4, 4];
+
 	const widthInput = document.getElementById(widthInputId);
 	const heightInput = document.getElementById(heightInputId);
-	// check width and height inputs
-	const inputDimensions = getDimensions(widthInput, heightInput);
-	if (inputDimensions[0] > 0 && inputDimensions[1] > 0)
-		dimensions = inputDimensions;
-	else // if not, set them to the default
-		[widthInput.value, heightInput.value] = dimensions;
+	
+	// if url has valid dimensions, set them to the url values
+	if (rows > 0 && columns > 0)
+		dimensions = [rows, columns];
+	// set values to match dimensions
+	[widthInput.value, heightInput.value] = dimensions;
 
 	// generate table
-	let cells = generateTable(document.getElementById(tableId), dimensions);
+	let cells = generateTable(dimensions, document.getElementById(tableId));
 	
 	// add onclick to scramble button
 	document.getElementById(scrambleButtonId).onclick = () => scramble(cells);
 	// add oninput to width and height inputs
 	widthInput.oninput = () => {
-		const newCells = updateDimensions(widthInput, heightInput);
-		if (newCells)
+		const newCells = updateDimensions(dimensions, widthInput, heightInput);
+		if (newCells) 
 			cells = newCells;
 	};
 	heightInput.oninput = () => {
-		const newCells = updateDimensions(widthInput, heightInput);
+		const newCells = updateDimensions(dimensions, widthInput, heightInput);
 		if (newCells)
 			cells = newCells;
 	}
